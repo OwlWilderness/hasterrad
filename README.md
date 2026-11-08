@@ -35,4 +35,6 @@ No root project license was present in those source checkouts. No new permission
 
 `python3 -B scripts/test.py` runs only the eight enumerated existing game source tests plus deterministic-export and real static HTTP checks. These cover core gameplay, controls/storage fallback, saucers/enemy-rock impacts, vector paths, counters and authenticated embed messaging. No real browser/phone visual or provider-login acceptance is claimed.
 
-Outstanding: independent source review and initial commit/push; human visual/focus/touch acceptance at narrow widths; resolve rights/attribution; separately scope the blocked account work; production packaging/origin/deployment decisions. None is activated by a local build.
+Recorded source closeout (2026-11-08): independent review approved the exact private-source allowlist, and initial source commit `a0a29f120a6cde34747b6cd1089dd0efe8351540` is complete locally. Remote publication is not established by this README update; it remains a separate serialized delivery step. This is not public art-rights or deployment acceptance.
+
+Outstanding: human visual/focus/touch acceptance at narrow widths; resolve rights/attribution; separately scope the blocked account work; production packaging/origin/deployment decisions. None is activated by a local build.
