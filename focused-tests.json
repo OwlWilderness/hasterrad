@@ -1,0 +1,10 @@
+[
+  "hasterrad_score_counters.cjs",
+  "quantumtekh_asteroids_collision.cjs",
+  "quantumtekh_asteroids_controller.cjs",
+  "quantumtekh_asteroids_embed.cjs",
+  "quantumtekh_asteroids_saucers.cjs",
+  "quantumtekh_asteroids_unit.cjs",
+  "quantumtekh_canonical_embed.cjs",
+  "quantumtekh_san_vector_art.cjs"
+]

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="HASTERRAD — a full-screen, original vector arcade. No downloads, no dependencies.">
+  <title>HASTERRAD · Quantumtekh</title>
+  <link rel="stylesheet" href="assets/asteroids.css">
+  <script src="assets/asteroids-embed.js" defer></script>
+  <script src="assets/asteroids-core.js" defer></script>
+  <script src="assets/asteroids.js" defer></script>
+</head>
+<body>
+  <header class="arcade-header">
+    <a href="index.html" class="home-link">← Quantumtekh</a>
+    <span class="edition">VECTOR ARCADE / 01</span>
+    <button id="pause" type="button" disabled>Pause <span class="key-hint">[P]</span></button>
+  </header>
+  <main id="arcade" aria-label="HASTERRAD vector arcade">
+    <div class="hud" aria-label="Game statistics">
+      <div><span class="hud-label">Score</span><output id="score">000000</output></div>
+      <div class="best"><span class="hud-label">Best <span id="storage-note">on this device</span></span><output id="best">000000</output></div>
+      <div class="wave"><span class="hud-label">Level</span><output id="wave">01</output></div>
+      <div class="lives"><span class="hud-label">Ships</span><output id="lives">△ △ △</output></div>
+      <div class="weapon"><span id="weapon-status" role="status" aria-live="polite">TAP FIRE · 4 LIVE MAX</span><span id="weapon-unlocks">AUTO @ Level 2: LOCKED · FASTER @ Level 5: LOCKED</span></div>
+    </div>
+    <canvas id="space" tabindex="0" aria-label="Game field. WASD controls: A/D or left/right arrows rotate, W or up arrow thrusts, S / H uses hyperspace. Tap Space to fire; hold for automatic fire at Level 2; faster fire at Level 5. Four shots on screen maximum. P pauses. Tab leaves the game.">Your browser needs Canvas support to play.</canvas>
+    <section id="overlay" class="overlay" aria-labelledby="game-title">
+      <p class="eyebrow" id="message">QUANTUMTEKH / DEEP SPACE</p>
+      <h1 id="game-title">HASTERRAD</h1>
+      <p id="subtitle">Nothing out here but you.</p>
+      <button id="start" type="button">Start flight <span aria-hidden="true">↗</span></button>
+      <p class="enter-hint" id="enter-hint">or press Enter</p>
+      <details class="account-panel">
+        <summary>Account scores &amp; leaderboard</summary>
+        <p id="account-status" role="status">Guest · device-local score only.</p>
+        <button id="urbit-login" type="button" hidden>Sign in with Urbit ↗</button>
+        <button id="remilianet-login" type="button" hidden>Sign in with RemiliaNET ↗</button>
+        <button id="account-logout" type="button" hidden>Sign out</button>
+        <button id="score-retry" type="button" hidden>Retry account save</button>
+        <p>Account personal best: <output id="account-best">—</output></p>
+        <ol id="account-board" aria-label="Account leaderboard"></ol>
+        <p class="small-note">Account authentication is deferred in this guest-only source split.<br>Scores are account-attributed, not cheat-proof. Guest records stay on this device.</p>
+      </details>
+      <div class="instructions">
+        <span><kbd>A</kbd><kbd>D</kbd> / <kbd>←</kbd><kbd>→</kbd> rotate</span><span><kbd>W</kbd> / <kbd>↑</kbd> thrust</span>
+        <span><kbd>Space</kbd> fire</span><span><kbd>S / H</kbd> hyperspace</span>
+      </div>
+      <p class="small-note">3 ships · break rocks · survive the next level<br>Tap Space or Fire for each shot · 4 shots on screen, not limited ammo.<br>Auto fire at Level 2 · faster auto fire at Level 5 · resets each run.<br>Hyperspace recharges in 5 seconds.</p>
+    </section>
+    <p id="announcement" class="sr-only" role="status" aria-live="polite"></p>
+    <div id="touch-controls" class="touch-controls" aria-label="Touch flight controls">
+      <div id="flight-stick" class="flight-stick" role="group" aria-label="Flight joystick: drag up to thrust, left or right to turn"><span id="stick-knob" class="stick-knob" aria-hidden="true">△</span></div>
+      <div class="touch-group"><button type="button" data-action="hyperspace" class="hyper" aria-label="Hyperspace">H</button><button type="button" data-action="fire" class="fire" aria-label="Fire">Fire</button></div>
+    </div>
+    <noscript><p class="no-script">JavaScript is required to play. <a href="index.html">Return home</a>.</p></noscript>
+  </main>
+  <footer class="arcade-footer"><span>INERTIA IS YOUR CO-PILOT.</span><span id="flight-status">READY WHEN YOU ARE</span></footer>
+</body>
+</html>
