@@ -1,0 +1,27 @@
+{
+  "format": 1,
+  "platform": "linux/amd64",
+  "visibility": "private",
+  "images": {
+    "web-parent": {
+      "reference": "ghcr.io/owlwilderness/hasterrad-web@sha256:7ce196cf303f3044b9537697fcc0c2a5736bc3b0ebce1685d0a29a24c9b06bfc",
+      "tag": "0.4.2",
+      "imageId": "sha256:0767b98847a286e5818b972a40650640def8d3e2e5ed14f38c94f89a6f1a64c8"
+    },
+    "api-parent": {
+      "reference": "ghcr.io/owlwilderness/hasterrad-api@sha256:7a5ffd971017f476396eaa5ca530f037e3166557870e771cb41da03d1364a5a0",
+      "tag": "0.4.2",
+      "imageId": "sha256:3a41517817b414432ff1f87d6d677bde6db70296d6596c286996eed509359c28"
+    },
+    "web-release": {
+      "reference": "ghcr.io/owlwilderness/hasterrad-web@sha256:1928e8c7ea3e26def979a5a51f53a4155e48de032685c875dd37f2f377d5f9eb",
+      "tag": "0.4.11",
+      "imageId": "sha256:8a8b4f7c2f960dc7750eebb4bf47b012ca303cefb3979871f59bcf35d63dca0e"
+    },
+    "api-release": {
+      "reference": "ghcr.io/owlwilderness/hasterrad-api@sha256:fd411f16ea99ab25ae2cad43cd8b2189c53b188df710dbccb40f8ebc08661838",
+      "tag": "0.4.11",
+      "imageId": "sha256:6457cd0e9bff4fdae00157b09b611dc86b9e5d0e6301fb3e61e699a6572f9348"
+    }
+  }
+}

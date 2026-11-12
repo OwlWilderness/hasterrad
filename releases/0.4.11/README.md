@@ -9,8 +9,8 @@ This is the runtime source snapshot of the installed 0.4.11 web/API release, not
 - `hasterrad-game/source/public` and `api/public`: exact deployed static bytes, with matching `artifact.json` SHA-256 manifests.
 - `hasterrad-game/source/api/server`: exact runtime server modules.
 - `qualification/tests`: the 112-test qualification suite. `qualification/server` retains the inherited authentication fixture modules; it is not the deployment entrypoint.
-- Pinned `viem` and `jose` dependencies with their lockfile. Wallet browser bundles and their third-party notices are preserved as deployed; this snapshot does **not** contain the wallet bundle's frontend build workspace.
-- Dockerfiles preserve the actual release overlay recipe. They require the existing local `web`/`api` **0.4.2 parent images** named in their `FROM` lines; their expected image IDs are in the comments. These parents are not promised to exist in a public registry. This is **not a clean-room, standalone Docker build kit**.
+- Pinned `viem` and `jose` dependencies with their lockfile. The [wallet build workspace](wallet/README.md), exact dependency lockfile, vendor provenance and notices are preserved; a fresh install/build reproduces all three deployed wallet outputs byte-for-byte.
+- Dockerfiles preserve the release overlay recipe using digest-pinned **0.4.2 parents in private OwlWilderness GHCR packages**. Original 0.4.11 release images are preserved there too. [Build/recovery instructions](deployment/README.md) and `images.lock.json` provide identity checks and clean-builder qualification. This rebuild relies on preserved parents, not rebuilding their operating-system layers from source.
 - Owner-specific Compose/manifest settings, private trust configuration, image archives, upload handles, sessions, databases, and operational receipts are deliberately excluded. No deployment happens when running the source tests.
 
 ## Run the source qualification
@@ -26,6 +26,10 @@ python3 qualification/scripts/check-copy.py
 ```
 
 The tests create disposable loopback servers and databases; they do not use a production account or database. Serial execution avoids collisions between inherited fixtures. Set `TMPDIR` to a private scratch directory if desired. Never use a live wallet key for the deterministic test vectors.
+
+## Rebuild and recovery
+
+See [deployment/README.md](deployment/README.md) for the single-command fresh-checkout rebuild, private-registry access, and operator templates. This preservation work does not redeploy the game. Licensing remains #1; the frozen wallet dependency graph has audit findings documented in [wallet/README.md](wallet/README.md).
 
 ## Optional isolated built-image checks
 

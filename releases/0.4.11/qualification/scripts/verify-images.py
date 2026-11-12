@@ -5,6 +5,8 @@ import hashlib
 import json
 import shlex
 import subprocess
+import os
+images = {s: os.environ.get('HASTERRAD_' + s.upper() + '_IMAGE', f'{s}.hasterrad-game.public.dappnode.eth:0.4.11') for s in ('web','api')}
 
 root = Path(__file__).resolve().parents[2] / 'hasterrad-game' / 'source'
 manifest = json.loads((root / 'public' / 'artifact.json').read_text())['files']
@@ -22,13 +24,13 @@ def check(image, directory, expected):
     print(f'{image}: {len(expected)} exact source hashes')
 
 for service, directory in [('web', '/content/current'), ('api', '/app/public')]:
-    check(f'{service}.hasterrad-game.public.dappnode.eth:0.4.11', directory, manifest)
+    check(images[service], directory, manifest)
 server = root / 'api' / 'server'
 modules = {path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in server.glob('*.mjs')}
-check('api.hasterrad-game.public.dappnode.eth:0.4.11', '/app/server', modules)
+check(images['api'], '/app/server', modules)
 expected_proxy = hashlib.sha256((root / 'live.conf').read_bytes()).hexdigest()
 proxy = subprocess.run(['docker', 'run', '--rm', '--platform', 'linux/amd64', '--network', 'none',
-                        '--entrypoint', '/bin/sh', 'web.hasterrad-game.public.dappnode.eth:0.4.11',
+                        '--entrypoint', '/bin/sh', images['web'],
                         '-c', 'sha256sum /etc/nginx/live.conf'], check=True, capture_output=True, text=True)
 assert proxy.stdout.split()[0] == expected_proxy, 'web image does not carry the reviewed replay-body limit'
-print('web.hasterrad-game.public.dappnode.eth:0.4.11: exact proxy configuration hash')
+print(images['web'] + ': exact proxy configuration hash')

@@ -1,0 +1,44 @@
+version: '3.5'
+services:
+  web:
+    image: web.hasterrad-game.public.dappnode.eth:0.4.11
+    restart: unless-stopped
+    cap_drop: [ALL]
+    security_opt: ['no-new-privileges:true']
+    logging: {driver: none}
+    stop_signal: SIGQUIT
+    stop_grace_period: 10s
+    depends_on: [api]
+  api:
+    image: api.hasterrad-game.public.dappnode.eth:0.4.11
+    restart: unless-stopped
+    volumes: ['scores:/data']
+    cap_drop: [ALL]
+    security_opt: ['no-new-privileges:true']
+    logging: {driver: none}
+    stop_grace_period: 10s
+    environment:
+      HOST: '0.0.0.0'
+      PORT: '8090'
+      HASTERRAD_PUBLIC_ORIGIN: 'https://game.example.invalid'
+      HASTERRAD_STATIC_DIR: '/app/public'
+      HASTERRAD_DB_PATH: '/data/topbar-auth/auth.sqlite'
+      HASTERRAD_SCORE_DB_PATH: '/data/scores.sqlite3'
+      HASTERRAD_DEV: '0'
+      HASTERRAD_INLINE_STYLES: '1'
+      HASTERRAD_CONNECT_ORIGINS: ''
+      HASTERRAD_URBIT_ENABLED: '0'
+      HASTERRAD_URBIT_PUBLIC_ORIGIN: ''
+      HASTERRAD_URBIT_VERIFIER_ORIGIN: ''
+      HASTERRAD_URBIT_SHIP: ''
+      HASTERRAD_REMILIANET_ENABLED: '0'
+      HASTERRAD_REMILIANET_CLIENT_ID: ''
+      HASTERRAD_REMILIANET_FAILURE_DIAGNOSTICS: '0'
+      HASTERRAD_WALLET_AUTH_ENABLED: '0'
+      HASTERRAD_AUTH_RPC_URL: ''
+      HASTERRAD_PUBLIC_RPC_URL: ''
+      HASTERRAD_WALLETCONNECT_PROJECT_ID: ''
+      HASTERRAD_BURNER_WALLET_MODE: 'disabled'
+      NODE_EXTRA_CA_CERTS: ''
+volumes:
+  scores: {}
