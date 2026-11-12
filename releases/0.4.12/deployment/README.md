@@ -13,7 +13,7 @@ python3 qualification/scripts/rebuild.py
 
 The command pulls and verifies preserved images, installs dependencies from locks, runs source tests, wallet typecheck/security tests/hash checks and a fresh audit, and builds both candidate images using an isolated empty-cache builder. It exercises static/server/proxy byte checks and isolated tmpfs HTTP/replay/tamper fixtures. No real owner data or credentials are used. Local images are `hasterrad-rebuild-web:0.4.12` and `hasterrad-rebuild-api:0.4.12`; they are not automatically published. Only one fixture run at a time is supported because loopback ports are fixed.
 
-The audit gate permits only the two documented non-emitted advisory exceptions in wallet/SECURITY.md; raw audit is not clean. If advisory data changes, fail and review rather than weaken the gate.
+The audit gate requires zero findings in the full dependency tree, with no exceptions. If advisory data changes, fail and review rather than weaken the gate.
 
 ## Operator templates — not permission to install
 

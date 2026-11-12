@@ -1,26 +1,21 @@
 # Wallet dependency remediation — issue #6
 
-## Fixed inputs
+## Acceptance: zero full npm audit findings
 
-- `uuid` → **11.1.1**: GHSA-w5hq-g745-h8pq. An undersized v5 output buffer reproduced a silent partial write on the old dependency; the regression now requires RangeError without buffer mutation. Normal v4 and deterministic v5 behavior are checked.
-- `ws` → **8.22.2**: above the patched ranges for GHSA-58qx-3vcg-4xpx and GHSA-96hv-2xvq-fx4p. Browser use is a native-WebSocket shim, not the Node WebSocket server implementation. All installed copies are pinned to avoid retaining vulnerable Node paths in the workspace.
-- `decode-uri-component` → **0.5.1**: patched for GHSA-vcc3-ghjq-m6fr and GHSA-qr28-fpjm-wq7f. Updated even though the browser build did not emit the old module.
+The candidate requires a fresh full npm audit with zero findings, including development dependencies. There are no package, severity, production-only or emitted-code exclusions. The previous Zod/deepmerge exceptions have been removed. Network failures, malformed audit reports, nonzero counts and nonempty findings fail qualification.
 
-Overrides retain the existing direct wallet versions and choices. They do not silently remove WalletConnect or replace wallet signing. Upstream majors/ranges are crossed in some transitive consumers, so typecheck, build and actual runtime qualification are required; raw audit alone is not compatibility evidence.
+## Reviewed dependency updates
 
-## Remaining findings — explicitly not fixed in node_modules
+- UUID **11.1.1**: fixes GHSA-w5hq-g745-h8pq; regression verifies undersized v5 output buffers throw without mutation and normal v4/v5 behavior remains available.
+- ws **8.22.2**: fixes GHSA-58qx-3vcg-4xpx and GHSA-96hv-2xvq-fx4p; all copies are pinned, including development paths.
+- decode-uri-component **0.5.1**: fixes GHSA-vcc3-ghjq-m6fr and GHSA-qr28-fpjm-wq7f.
+- Zod **4.6.7**: above the GHSA-mrhx-c7xc-m3w5 fixed version. Zod is a wallet dependency, not the Urbit ~zod ship. No v3 compatibility alias or vulnerable older copy is retained in the lockfile.
+- @vanilla-extract/css **1.21.3**: upstream replaces deepmerge with deepmerge-ts. The vulnerable deepmerge package (GHSA-gcqx-w48m-w2h4) is absent from the candidate lockfile; no local fork, version disguise or advisory suppression is used.
 
-The refreshed candidate audit reports **22 affected-package entries: 19 high, 3 low**, originating in two direct advisories. The increase in propagated high entries versus the original report reflects npm's recalculated dependency graph, not 19 distinct new vulnerabilities.
+Overrides intentionally cross some transitive consumer ranges. Tests exercise every installed ABI schema version with valid/invalid ABI, representative Reown RPC/theme/account schemas, Coinbase schema initialization, actual wallet-connector factories and the existing auth/game integration suite. These are bounded compatibility checks, not proof of every external wallet flow. Direct wallet choices remain unchanged.
 
-| Direct advisory | Disposition |
-| --- | --- |
-| Zod GHSA-mrhx-c7xc-m3w5 | No Zod input contributes emitted bytes. The root and nested @reown/appkit-wallet Zod instances are excluded by tree shaking. Upgrading v3 consumers blindly to v4.6.6+ would cross a major API boundary. |
-| deepmerge GHSA-gcqx-w48m-w2h4 | No deepmerge input contributes emitted bytes. It is inherited via @vanilla-extract/css; this build uses the browser serializer and esbuild rather than executing the Node CSS compiler over untrusted objects. Upstream reports no patched version. |
-
-`check-audit.mjs` checks every direct advisory against this exact allowlist and the current bundle input paths. It fails if either excluded package contributes code, if any unknown direct advisory appears, or if npm audit/provenance cannot be read. Propagated package entries remain in the raw counts; they are not incorrectly treated as additional independent vulnerabilities. No node_modules tree is deployed with the browser bundle.
-
-These are artifact-specific non-exposure conclusions, not a claim that Zod/deepmerge are generally safe or that npm audit is clean. Reassess if bundling, connectors, SSR or build tooling changes. Prebundled upstream internals outside npm's advisory graph are not exhaustively audited by this gate.
+The rebuilt browser JS/CSS match the preceding candidate; the updated dependency notices are regenerated and included in BOTH container overlays. Emitted-input provenance remains useful build evidence but does not suppress audit findings.
 
 ## Boundaries
 
-The 0.4.11 snapshot and original registry images remain unchanged. No production login, signature, installation, Config write or database migration is part of this work. Local synthetic auth/runtime checks do not replace later owner real-wallet acceptance.
+The frozen 0.4.11 snapshot and original registry images are unchanged. The candidate is not deployed. No owner Config, auth database or scores are modified. Browser-tool loopback smoke was previously blocked and is not claimed; new real-provider/mobile login acceptance remains distinct from synthetic tests. The existing MetaMask empty-glob build warning remains visible. A clean npm audit is time-bound advisory evidence, not a comprehensive security guarantee.

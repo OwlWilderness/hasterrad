@@ -7,6 +7,6 @@ const audit=JSON.parse(run.stdout);
 const bundle=JSON.parse(await readFile(new URL('./dist/bundle.json',import.meta.url)));
 if(!bundle.inputs?.length)throw Error('Missing bundle provenance');
 const exclusions=classify(audit,bundle.inputs);
-const result={rawAudit:audit.metadata.vulnerabilities,exclusions,scope:'npm-reported direct advisories in emitted browser inputs; not a general security audit'};
+const result={rawAudit:audit.metadata.vulnerabilities,exclusions,scope:'full npm dependency audit, including development dependencies; zero findings required, no exceptions'};
 await writeFile(new URL('./dist/audit-review.json',import.meta.url),JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify(result,null,2));

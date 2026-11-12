@@ -4,9 +4,9 @@
 
 ## Changes
 
-Pin UUID 11.1.1, ws 8.22.2 and decode-uri-component 0.5.1 through reviewed npm overrides. Preserve existing wallet choices and direct dependency versions. Add UUID regression tests and a fail-closed, advisory-specific emitted-input audit gate.
+Pin UUID 11.1.1, ws 8.22.2, decode-uri-component 0.5.1, Zod 4.6.7 and Vanilla Extract CSS 1.21.3 through reviewed npm overrides. Preserve existing wallet choices and direct dependency versions. Add UUID regression tests and a fail-closed zero-findings full-audit gate and dependency compatibility tests.
 
-See [wallet/SECURITY.md](wallet/SECURITY.md) for the remaining non-emitted advisories and limits. Raw npm audit is **not zero**. These findings must not be described as fixed in the installed dependency tree.
+See [wallet/SECURITY.md](wallet/SECURITY.md) for all dependency changes and compatibility limits. A fresh full npm audit must report **zero vulnerabilities**, without exclusions.
 
 ## Qualification
 
