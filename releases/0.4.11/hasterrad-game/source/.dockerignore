@@ -1,0 +1,6 @@
+*
+!Dockerfile
+!nginx.conf
+!live.conf
+!public/
+!public/**

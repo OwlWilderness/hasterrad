@@ -1,0 +1,134 @@
+{
+  "@metamask/sdk-analytics@0.0.5": {
+    "files": [
+      {
+        "file": "metamask-sdk-analytics-LICENSE.txt",
+        "url": "https://raw.githubusercontent.com/MetaMask/metamask-sdk/e1764d4a5c7cedd4bdac0abf36d9281ed58d7a90/LICENSE",
+        "sha256": "c93277efbafa3f89b6c0da4e9c0f1067f407cc51f3e6e5371dae2016f9b23a4a",
+        "reference": "e1764d4a5c7cedd4bdac0abf36d9281ed58d7a90",
+        "versionSpecific": true
+      }
+    ],
+    "note": "Authentic upstream supplement; published package omitted notice. Reference qualification is explicit; not legal acceptance."
+  },
+  "@safe-global/safe-apps-sdk@9.1.0": {
+    "files": [
+      {
+        "file": "safe-global-safe-apps-sdk-LICENSE.md.txt",
+        "url": "https://raw.githubusercontent.com/safe-global/safe-apps-sdk/5f9ef7072e32670a71e35d390cfdeb5fc504efcf/LICENSE.md",
+        "sha256": "d9ca86670b0a4ca4a160fcf0196c544a8b9dffcb8529aa05b3b6bc1056933a41",
+        "reference": "5f9ef7072e32670a71e35d390cfdeb5fc504efcf",
+        "versionSpecific": true
+      }
+    ],
+    "note": "Authentic upstream supplement; published package omitted notice. Reference qualification is explicit; not legal acceptance."
+  },
+  "@safe-global/safe-apps-provider@0.18.6": {
+    "files": [
+      {
+        "file": "safe-global-safe-apps-provider-LICENSE.md.txt",
+        "url": "https://raw.githubusercontent.com/safe-global/safe-apps-sdk/f09826c484ada43e377ad77db82e4a4173aa3b1e/LICENSE.md",
+        "sha256": "d9ca86670b0a4ca4a160fcf0196c544a8b9dffcb8529aa05b3b6bc1056933a41",
+        "reference": "f09826c484ada43e377ad77db82e4a4173aa3b1e",
+        "versionSpecific": true
+      }
+    ],
+    "note": "Authentic upstream supplement; published package omitted notice. Reference qualification is explicit; not legal acceptance."
+  },
+  "uint8arrays@3.1.0": {
+    "files": [
+      {
+        "file": "uint8arrays-LICENSE-MIT.txt",
+        "url": "https://raw.githubusercontent.com/achingbrain/uint8arrays/main/LICENSE-MIT",
+        "sha256": "8f71659370c5268d9a1dc962a46232540e8fca63462586d8efaa95aab492a208",
+        "reference": "main",
+        "versionSpecific": false
+      }
+    ],
+    "note": "Authentic upstream supplement; published package omitted notice. Reference qualification is explicit; not legal acceptance."
+  },
+  "multiformats@9.9.0": {
+    "files": [
+      {
+        "file": "multiformats-LICENSE.txt",
+        "url": "https://raw.githubusercontent.com/multiformats/js-multiformats/master/LICENSE",
+        "sha256": "9c17f5c830232d45eab60e1bdc8f5cb4df631ddf56fe29aeced3009256e544b0",
+        "reference": "master",
+        "versionSpecific": false
+      },
+      {
+        "file": "multiformats-LICENSE-MIT.txt",
+        "url": "https://raw.githubusercontent.com/multiformats/js-multiformats/5c486316c1b60eb0103dae6c7a5e8d900bfe3b72/LICENSE-MIT",
+        "sha256": "4b3beb461923c080edc76faa2bd79c61295f3d354cd79ee205f427ce52dc6d66",
+        "reference": "5c486316c1b60eb0103dae6c7a5e8d900bfe3b72",
+        "versionSpecific": true
+      },
+      {
+        "file": "multiformats-LICENSE-APACHE.txt",
+        "url": "https://raw.githubusercontent.com/multiformats/js-multiformats/5c486316c1b60eb0103dae6c7a5e8d900bfe3b72/LICENSE-APACHE",
+        "sha256": "b41dcb3b39cb28279a67949b10d522356ca5c58260eb1983f7aad8b61e928b42",
+        "reference": "5c486316c1b60eb0103dae6c7a5e8d900bfe3b72",
+        "versionSpecific": true
+      }
+    ],
+    "note": "Authentic upstream supplement; published package omitted notice. Reference qualification is explicit; not legal acceptance."
+  },
+  "@reown/appkit-wallet@1.7.8": {
+    "files": [
+      {
+        "file": "reown-com-appkit-LICENSE.txt",
+        "url": "https://raw.githubusercontent.com/reown-com/appkit/c2e3e52181b723c220935ea7e4ebd1e73c4d9ea2/LICENSE",
+        "sha256": "cedd8e12ddcdd31fa382a596d72b188c39fee942a5f3b3229bb51d5bab7f934f",
+        "reference": "c2e3e52181b723c220935ea7e4ebd1e73c4d9ea2",
+        "versionSpecific": true
+      }
+    ],
+    "note": "Authentic version-tag/gitHead source notice supplement. Not legal acceptance."
+  },
+  "@reown/appkit-utils@1.7.8": {
+    "files": [
+      {
+        "file": "reown-com-appkit-LICENSE.txt",
+        "url": "https://raw.githubusercontent.com/reown-com/appkit/c2e3e52181b723c220935ea7e4ebd1e73c4d9ea2/LICENSE",
+        "sha256": "cedd8e12ddcdd31fa382a596d72b188c39fee942a5f3b3229bb51d5bab7f934f",
+        "reference": "c2e3e52181b723c220935ea7e4ebd1e73c4d9ea2",
+        "versionSpecific": true
+      }
+    ],
+    "note": "Authentic version-tag/gitHead source notice supplement. Not legal acceptance."
+  },
+  "@reown/appkit@1.7.8": {
+    "files": [
+      {
+        "file": "reown-com-appkit-LICENSE.txt",
+        "url": "https://raw.githubusercontent.com/reown-com/appkit/c2e3e52181b723c220935ea7e4ebd1e73c4d9ea2/LICENSE",
+        "sha256": "cedd8e12ddcdd31fa382a596d72b188c39fee942a5f3b3229bb51d5bab7f934f",
+        "reference": "c2e3e52181b723c220935ea7e4ebd1e73c4d9ea2",
+        "versionSpecific": true
+      }
+    ],
+    "note": "Authentic version-tag/gitHead source notice supplement. Not legal acceptance."
+  },
+  "encode-utf8@1.0.3": {
+    "files": [
+      {
+        "file": "encode-utf8-LICENCE.txt",
+        "url": "https://raw.githubusercontent.com/LinusU/encode-utf8/master/LICENCE",
+        "sha256": "48f761956f2709d24a8750e2fd37cf347f421125d625f48a53f03d72834d2ab8",
+        "reference": "master",
+        "versionSpecific": false
+      }
+    ]
+  },
+  "react-remove-scroll-bar@2.3.8": {
+    "files": [
+      {
+        "file": "react-remove-scroll-bar.txt",
+        "url": "https://raw.githubusercontent.com/theKashey/react-remove-scroll-bar/master/LICENSE",
+        "sha256": "a79aae0c0f21990d9d963bb3c5a79cdcea9a46f8523ba55c58d7fe776b6ebc84",
+        "reference": "master",
+        "versionSpecific": false
+      }
+    ]
+  }
+}
