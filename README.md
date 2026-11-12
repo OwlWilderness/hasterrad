@@ -2,7 +2,7 @@
 
 ## Deployed release source
 
-[Dodge. Blast. Survive. Climb the leaderboard. — 0.4.11](releases/0.4.11/README.md) preserves the deployed account-enabled runtime, replay-verified leaderboard, and qualification tests. See that release for current deployment evidence and remaining acceptance limits.
+[Dodge. Blast. Survive. Climb the leaderboard. — 0.4.12](releases/0.4.12/README.md) is the installed wallet-security release with a zero-findings full npm audit, verified public assets and retained Config/storage. The [0.4.11 snapshot](releases/0.4.11/README.md) remains preserved for recovery. See the current release for verification and acceptance limits.
 
 The guest-only export below is retained unchanged as a legacy baseline. Its deferred-auth and deployment statements describe that baseline, not the 0.4.11 release.
 

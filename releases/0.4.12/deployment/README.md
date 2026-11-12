@@ -1,6 +1,6 @@
 # Candidate build and deployment boundaries
 
-0.4.12 is a local security candidate, not an installed release. Original 0.4.11 recovery images and 0.4.2 parents remain pinned in ../images.lock.json; there are no 0.4.12 registry images in that file.
+0.4.12 is installed and publicly verified. The instructions below rebuild isolated qualification images; they do not reinstall the live package. Original 0.4.11 recovery images and 0.4.2 parents remain pinned in ../images.lock.json; there are no 0.4.12 registry images in that file.
 
 ## Clean qualification
 

@@ -18,4 +18,4 @@ The rebuilt browser JS/CSS match the preceding candidate; the updated dependency
 
 ## Boundaries
 
-The frozen 0.4.11 snapshot and original registry images are unchanged. The candidate is not deployed. No owner Config, auth database or scores are modified. Browser-tool loopback smoke was previously blocked and is not claimed; new real-provider/mobile login acceptance remains distinct from synthetic tests. The existing MetaMask empty-glob build warning remains visible. A clean npm audit is time-bound advisory evidence, not a comprehensive security guarantee.
+The frozen 0.4.11 snapshot and original registry images are unchanged. The release is installed: web/API running state, public asset hashes, unchanged Config and retained volume/auth path were verified, and the prior top score remains visible. Browser-tool loopback smoke was previously blocked; the deployed public page now renders v0.4.12 with all login controls enabled. No new real-provider/mobile login is claimed. The existing MetaMask empty-glob build warning remains visible. A clean npm audit is time-bound advisory evidence, not a comprehensive security guarantee.

@@ -1,6 +1,6 @@
-# Hasterrad 0.4.12 — wallet security candidate
+# Hasterrad 0.4.12 — wallet security release
 
-**Not deployed.** The live/preserved release remains 0.4.11. This candidate changes wallet transitive dependencies and the visible version label; game mechanics, server auth, owner Config and databases are unchanged.
+**Installed and publicly verified.** Both DAppNode services run 0.4.12; both game routes show v0.4.12 and all 17 served assets match this release. Saved owner Config, the named scores volume and auth database path are unchanged. The existing 5,480-point score remains rank 1. No new provider login was exercised. The 0.4.11 recovery artifacts remain preserved.
 
 ## Changes
 
@@ -18,6 +18,6 @@ python3 qualification/scripts/rebuild.py
 
 The command runs the inherited auth/game tests, wallet security tests/typecheck/build/hash/audit checks, then builds isolated linux/amd64 images and exercises asset/module/proxy hashes, HTTP and replay/tamper behavior. It never stages or installs. Real-provider login with this new bundle remains owner acceptance after separately authorized deployment.
 
-The included images.lock.json intentionally preserves the **0.4.2 parents and 0.4.11 recovery images**, not nonexistent 0.4.12 registry releases. New local qualification images use hasterrad-rebuild-{web,api}:0.4.12. No 0.4.12 registry publication or install is implied.
+The included images.lock.json intentionally preserves the **0.4.2 parents and 0.4.11 recovery images**, not nonexistent 0.4.12 registry releases. New local qualification images use hasterrad-rebuild-{web,api}:0.4.12. 0.4.12 was installed once from a separately validated two-image archive. Its original archive is retained locally; 0.4.12 registry publication has not been performed.
 
 Original source license and artwork exclusions are described in the root LICENSE and NOTICE.md. Existing third-party notices remain attached to their respective code.
