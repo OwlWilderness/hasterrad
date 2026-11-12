@@ -45,4 +45,4 @@ Original Hasterrad code is now offered under the [MIT License](LICENSE), with th
 
 Recorded source closeout (2026-11-08): independent review approved the exact private-source allowlist, and initial source commit `a0a29f120a6cde34747b6cd1089dd0efe8351540` is complete locally. Remote publication is not established by this README update; it remains a separate serialized delivery step. This is not public art-rights or deployment acceptance.
 
-Outstanding: human visual/focus/touch acceptance at narrow widths; resolve rights/attribution; separately scope the blocked account work; production packaging/origin/deployment decisions. None is activated by a local build.
+Historical baseline follow-ups were human visual/focus/touch acceptance, rights/attribution, account work and deployment decisions. These are not the current release status: the owner-approved licensing/attribution scope is documented in LICENSE and NOTICE.md, and the installed release is linked above. Third-party exclusions remain applicable; completing the documentation does not grant additional artwork or trademark rights.
