@@ -1,5 +1,13 @@
 # HASTERRAD (web)
 
+## Deployed release source
+
+[Dodge. Blast. Survive. Climb the leaderboard. — 0.4.11](releases/0.4.11/README.md) preserves the deployed account-enabled runtime, replay-verified leaderboard, and qualification tests. See that release for current deployment evidence and remaining acceptance limits.
+
+The guest-only export below is retained unchanged as a legacy baseline. Its deferred-auth and deployment statements describe that baseline, not the 0.4.11 release.
+
+## Legacy guest-only export
+
 Standalone guest-only Canvas/vector arcade source. Requires Python 3.9+ to export/preview and Node.js to run the focused source tests. No package install, container build, account backend or network dependency is needed for guest play.
 
 ```sh

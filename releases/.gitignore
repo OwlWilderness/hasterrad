@@ -1,0 +1,16 @@
+# Runtime state and deployment-only material must not be committed.
+node_modules/
+*.sqlite
+*.sqlite3
+*.sqlite-*
+*.sqlite3-*
+*.db
+*.tar
+*.tar.gz
+*.tap
+upload-receipt.json
+stage-operation.json
+preinstall-baseline.json
+postinstall-verification.json
+.env
+.env.*

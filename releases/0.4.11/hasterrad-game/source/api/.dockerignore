@@ -1,0 +1,12 @@
+*
+!Dockerfile
+!package.json
+!package-lock.json
+!server/
+!server/*.mjs
+!server/README.md
+!public/
+!public/**
+
+!trust/
+!trust/urbit-origin-ca.pem
