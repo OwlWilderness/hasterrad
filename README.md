@@ -2,7 +2,7 @@
 
 ## Deployed release source
 
-[Dodge. Blast. Survive. Climb the leaderboard. — 0.4.11](releases/0.4.11/README.md) preserves the deployed account-enabled runtime, replay-verified leaderboard, and qualification tests. See that release for current deployment evidence and remaining acceptance limits.
+[Dodge. Blast. Survive. Climb the leaderboard. — 0.4.12](releases/0.4.12/README.md) is the installed wallet-security release with a zero-findings full npm audit, verified public assets and retained Config/storage. The [0.4.11 snapshot](releases/0.4.11/README.md) remains preserved for recovery. See the current release for verification and acceptance limits.
 
 The guest-only export below is retained unchanged as a legacy baseline. Its deferred-auth and deployment statements describe that baseline, not the 0.4.11 release.
 
@@ -37,7 +37,7 @@ Account auth has an unresolved callback/cookie-binding defect and a prior provid
 
 Extracted from `dappnode-web-publisher` frontend baseline `c58819e77c33fb583cbe19399d5a5a9fb4eab4f1`, using the accepted game worker `a2f4182c632dd34dceb295a3ae074eb6957bcee2` for the latest core/controller/art/embed tests. This retains the enemy-rock collision fix and product-reference-informed vectors, not the older parent's game snapshot. Intentional adaptations are source-root test paths, same-origin message targeting and disabled optional account loading; no gameplay redesign.
 
-No root project license was present in those source checkouts. No new permission or product-art clearance is asserted; owner review is required before publication or redistribution. No downloaded product reference images or private evidence are included.
+Original Hasterrad code is now offered under the [MIT License](LICENSE), with the owner identified as `quantumtekh.eth`. See [license scope and attribution](NOTICE.md): third-party code, SAN-inspired artwork, provider icons and trademarks are not relicensed by this grant. The owner reports Sansound has no objection to the SAN-inspired art; this is not a blanket third-party redistribution license. Urbit, Remilia and Ethereum login icons remain separately attributed. No downloaded product reference images or private evidence are included.
 
 ## Verification and remaining work
 

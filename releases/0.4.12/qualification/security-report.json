@@ -1,0 +1,51 @@
+{
+  "candidate": "0.4.12",
+  "deployed": false,
+  "source_tests": 112,
+  "wallet_tests": 13,
+  "wallet_typecheck": "passed",
+  "clean_build": "passed",
+  "image_static_hashes_each": 17,
+  "api_module_hashes": 13,
+  "isolated_http": "passed",
+  "replay_tamper": "passed",
+  "browser_smoke": "blocked by browser tool private-address policy; not verified",
+  "live_provider_acceptance": "not attempted",
+  "wallet_lock_sha256": "604479489cd64455141beae107d9a3ca8977699ce386a287c27f0c2bbbff062d",
+  "audit": {
+    "rawAudit": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "exclusions": [],
+    "scope": "full npm dependency audit, including development dependencies; zero findings required, no exceptions"
+  },
+  "wallet_files": {
+    "index.css": "1a61d31092dc23a8c6de40940df6af3f3d52883ce7f9d3037d38695065d968c8",
+    "index.js": "23c355601861b6c1216e2edc5f1e4a328e990244cdd485502faa4624f6c987f1",
+    "LICENSES.txt": "340cfd46de29b984d8b59212c6b9a5c7126b3315d8eaa3109308acf842fd49fc"
+  },
+  "other_audits": {
+    "root": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "api": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    }
+  },
+  "compatibility": "all installed ABI schema variants, Reown representative schemas, Coinbase schema imports, six connector factories"
+}

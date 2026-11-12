@@ -1,0 +1,9 @@
+{
+  "package": "@react-native-async-storage/async-storage",
+  "version": "2.2.0",
+  "source": "https://registry.npmjs.org/@react-native-async-storage/async-storage/-/async-storage-2.2.0.tgz",
+  "files": {
+    "LICENSE": "212dbf14b113759356207347826f21ac3c81151943fdb89ce25da5dc6214831c",
+    "AsyncStorage.js": "3b8afc3e15d9a4bdd5fd08e43ede4ff8252311681286fc440a7fdb1fd1cf7766"
+  }
+}

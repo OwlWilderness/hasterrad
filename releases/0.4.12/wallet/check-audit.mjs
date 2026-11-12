@@ -1,0 +1,12 @@
+import {spawnSync} from 'node:child_process';
+import {readFile,writeFile} from 'node:fs/promises';
+import {classify} from './audit-policy.mjs';
+const run=spawnSync('npm',['audit','--json'],{encoding:'utf8',timeout:60000,maxBuffer:8*1024*1024});
+if(run.error||![0,1].includes(run.status))throw Error('npm audit failed; no safety conclusion');
+const audit=JSON.parse(run.stdout);
+const bundle=JSON.parse(await readFile(new URL('./dist/bundle.json',import.meta.url)));
+if(!bundle.inputs?.length)throw Error('Missing bundle provenance');
+const exclusions=classify(audit,bundle.inputs);
+const result={rawAudit:audit.metadata.vulnerabilities,exclusions,scope:'full npm dependency audit, including development dependencies; zero findings required, no exceptions'};
+await writeFile(new URL('./dist/audit-review.json',import.meta.url),JSON.stringify(result,null,2)+'\n');
+console.log(JSON.stringify(result,null,2));

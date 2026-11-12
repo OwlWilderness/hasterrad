@@ -1,0 +1,36 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {existsSync, mkdtempSync} from 'node:fs';
+import {join} from 'node:path';
+import {tmpdir} from 'node:os';
+const fetch=(url,options={})=>globalThis.fetch(url,{...options,headers:{connection:'close',...options.headers}});
+
+test('real HTTP anonymous bootstrap, exact Origin/CSRF logout and durable restart', async t => {
+  assert.ok(existsSync(new URL('../../server/app.mjs', import.meta.url)), 'auth service is implemented');
+  const {createApp} = await import('../../server/app.mjs');
+  const dir=mkdtempSync(join(tmpdir(),'auth-session-'));
+  let app=await createApp({origin:'http://127.0.0.1:18991',dev:true,dbPath:join(dir,'auth.sqlite')});
+  await app.listen(18991); t.after(()=>app.close());
+  const first=await fetch('http://127.0.0.1:18991/api/session');
+  assert.equal(first.status,200);
+  const cookie=first.headers.get('set-cookie').split(';')[0];
+  assert.match(first.headers.get('set-cookie'), /HttpOnly; SameSite=Lax; Path=\//);
+  const session=await first.json(); assert.equal(session.authenticated,false); assert.equal(session.user,null);
+  assert.deepEqual(session.providers,{urbit:false,remilianet:false,wallet:false});
+  assert.deepEqual(session.wallet,{chainId:1,projectId:null,rpcUrl:null,burnerWalletMode:'disabled'});
+  assert.ok(session.csrf.length>=32);
+  const call=(headers,body='{}')=>fetch('http://127.0.0.1:18991/auth/logout',{method:'POST',headers:{cookie,'content-type':'application/json',...headers},body});
+  assert.equal((await call({})).status,403);
+  assert.equal((await call({origin:'https://attacker.invalid','x-csrf-token':session.csrf})).status,403);
+  assert.equal((await call({origin:'http://127.0.0.1:18991','x-csrf-token':'bad'})).status,403);
+  await app.close();
+  app=await createApp({origin:'http://127.0.0.1:18991',dev:true,dbPath:join(dir,'auth.sqlite')});await app.listen(18991);
+  assert.equal((await (await fetch('http://127.0.0.1:18991/api/session',{headers:{cookie}})).json()).csrf,session.csrf);
+  const logout=await call({origin:'http://127.0.0.1:18991','x-csrf-token':session.csrf});
+  const loggedOut=await logout.json();assert.equal(logout.status,200); assert.equal(loggedOut.authenticated,false);
+  const newCookie=logout.headers.get('set-cookie').split(';')[0];
+  const replay=await (await fetch('http://127.0.0.1:18991/api/session',{headers:{cookie}})).json();assert.notEqual(replay.csrf,session.csrf);
+  const aliases=await fetch('http://127.0.0.1:18991/api/wallet/session',{headers:{cookie:newCookie}});assert.equal((await aliases.json()).csrf,loggedOut.csrf);
+  const deleted=await fetch('http://127.0.0.1:18991/api/wallet/session',{method:'DELETE',headers:{cookie:newCookie,origin:'http://127.0.0.1:18991','x-csrf-token':loggedOut.csrf,'content-type':'application/json'},body:'{}'});assert.equal(deleted.status,200);assert.equal((await deleted.json()).authenticated,false);
+  assert.equal((await fetch('http://127.0.0.1:18991/auth/urbit/start',{redirect:'manual'})).status,503);
+});
