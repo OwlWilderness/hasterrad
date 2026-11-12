@@ -1,0 +1,50 @@
+{
+  "candidate": "0.4.12",
+  "deployed": false,
+  "source_tests": 112,
+  "wallet_tests": 9,
+  "wallet_typecheck": "passed",
+  "clean_build": "passed",
+  "image_static_hashes_each": 17,
+  "api_module_hashes": 13,
+  "isolated_http": "passed",
+  "replay_tamper": "passed",
+  "browser_smoke": "blocked by browser tool private-address policy; not verified",
+  "live_provider_acceptance": "not attempted",
+  "wallet_lock_sha256": "a546c3f10a660f4475fd5288fdcb5bb8ad4feda335ba4d6be1032917327180a9",
+  "audit": {
+    "rawAudit": {
+      "info": 0,
+      "low": 3,
+      "moderate": 0,
+      "high": 19,
+      "critical": 0,
+      "total": 22
+    },
+    "exclusions": [
+      {
+        "name": "deepmerge",
+        "advisory": "https://github.com/advisories/GHSA-gcqx-w48m-w2h4",
+        "disposition": "not-emitted",
+        "nodes": [
+          "node_modules/deepmerge"
+        ]
+      },
+      {
+        "name": "zod",
+        "advisory": "https://github.com/advisories/GHSA-mrhx-c7xc-m3w5",
+        "disposition": "not-emitted",
+        "nodes": [
+          "node_modules/@reown/appkit-wallet/node_modules/zod",
+          "node_modules/zod"
+        ]
+      }
+    ],
+    "scope": "npm-reported direct advisories in emitted browser inputs; not a general security audit"
+  },
+  "wallet_files": {
+    "index.css": "1a61d31092dc23a8c6de40940df6af3f3d52883ce7f9d3037d38695065d968c8",
+    "index.js": "23c355601861b6c1216e2edc5f1e4a328e990244cdd485502faa4624f6c987f1",
+    "LICENSES.txt": "478e1554e16069e16eb5b389da23a73227d4928460fcd37cd66cbcc6448b7dcc"
+  }
+}

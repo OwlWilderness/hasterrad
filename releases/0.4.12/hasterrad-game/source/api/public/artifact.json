@@ -1,0 +1,23 @@
+{
+  "files": {
+    "assets/account-shell.css": "993c82b06f4d260256a19a235bb1e5b387b6c662797895b7529080800ca20d99",
+    "assets/account-shell.mjs": "ca0c56d5a6d45454a8abc6412da591bdbec164c59b638dbd6d0fabc4d5fd8671",
+    "assets/asteroids-core.js": "628538843625f6709f51e4956ee836662a0dfcb317371a389bbb20ec10bbf24d",
+    "assets/asteroids-embed.js": "199210ff427eabe5dceb951dbf8dc7b9699777715870944d216a88c25c51fbb6",
+    "assets/asteroids.css": "1c9a917e983687af2d0c32fc1b2e79a0560fdea5b1f39de9abec9d0b4d8920ab",
+    "assets/asteroids.js": "ce18f922f50c4116fc0ecaea77ef6469766c8e2ed9e39c20b6419048144a5514",
+    "assets/auth-session.mjs": "080e7df4be437a11e1045160dc035ef070f8df5289ee0a57723b81b89b80b86c",
+    "assets/brands/NOTICES.txt": "2df51c2b436b8886abc1950f08199b6761586ac1611899c287a78074865dbaae",
+    "assets/brands/ethereum.svg": "7320e64e211db747308cc3e546e5360d42f3790b7a14fba0504573790e17f124",
+    "assets/brands/remilia.png": "9175dcab36df52855f523d7c897d7bdf1e1ad04c28ac0e7a09ee63ff987ec50a",
+    "assets/brands/urbit.svg": "1b92f79b69887418406daa01040c8de36a5e18ac7e9355e04c761af69106756b",
+    "assets/hasterrad-scores.js": "7c6e456b44a81eefa7c8d2a71e860560091d1ba74d738c9d133d6cb479f123a6",
+    "assets/wallet/LICENSES.txt": "478e1554e16069e16eb5b389da23a73227d4928460fcd37cd66cbcc6448b7dcc",
+    "assets/wallet/index.css": "1a61d31092dc23a8c6de40940df6af3f3d52883ce7f9d3037d38695065d968c8",
+    "assets/wallet/index.js": "23c355601861b6c1216e2edc5f1e4a328e990244cdd485502faa4624f6c987f1",
+    "asteroids.html": "226ffe1cae357e486dc2f1e4b6c729e18dc8e2ea8b09b232be8c1c8607493cde",
+    "index.html": "8576bf4c11598c7a83b498777032ad6a692b3248b0997a7263decea4b4bfce4d"
+  },
+  "format": 1,
+  "mode": "auth-ui"
+}

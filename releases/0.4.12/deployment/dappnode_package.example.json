@@ -1,0 +1,11 @@
+{
+  "name": "hasterrad-game.public.dappnode.eth",
+  "version": "0.4.12",
+  "type": "service",
+  "license": "UNLICENSED",
+  "architectures": ["linux/amd64"],
+  "mainService": "web",
+  "description": "Dodge. Blast. Survive. Climb the leaderboard.",
+  "links": {"ui": "https://game.example.invalid"},
+  "gettingStarted": "Operator template, not installed owner settings. Configure the real HTTPS origin and optional providers before installing. Preserve owner Config and the existing scores:/data volume with separate auth and score databases. Licensing remains unresolved; this template grants no additional rights."
+}
