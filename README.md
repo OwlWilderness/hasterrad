@@ -6,7 +6,7 @@ A browser arcade game with keyboard and touch controls.
 
 ## Release source
 
-[Release 0.4.12](releases/0.4.12/README.md) contains the game, account sign-in and leaderboard code. See its [build and deployment guide](releases/0.4.12/deployment/README.md) for prerequisites and rebuild instructions. Versioned source snapshots are kept in [`releases/`](releases/).
+[Release 0.4.13](releases/0.4.13/README.md) contains the game, account sign-in and leaderboard code. See its [build and deployment guide](releases/0.4.13/deployment/README.md) for prerequisites and rebuild instructions. Versioned source snapshots are kept in [`releases/`](releases/).
 
 ## Run locally (guest-only)
 

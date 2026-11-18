@@ -1,0 +1,7 @@
+.hasterrad-auth[hidden] { display:none; }
+.hasterrad-auth { position:fixed; inset:5vh max(1rem, calc((100vw - 38rem)/2)); z-index:1000; overflow:auto; max-height:90dvh; padding:1.5rem; color:#e6fff1; background:#081411; border:1px solid #72e5b4; border-radius:1rem; box-shadow:0 0 0 100vmax #000b; font:1rem/1.5 system-ui,sans-serif; }
+.hasterrad-auth button,.hasterrad-auth a { display:inline-block; margin:.4rem .4rem .4rem 0; padding:.7rem 1rem; border:1px solid #72e5b4; border-radius:.4rem; color:inherit; background:#122c24; cursor:pointer; }
+.hasterrad-auth button:disabled { opacity:.5; cursor:not-allowed; }
+.hasterrad-auth :focus-visible { outline:3px solid #efff87; outline-offset:3px; }
+.hasterrad-auth h2 { font-size:1.4rem; }
+@media(max-width:480px) { .hasterrad-auth {inset:1rem; max-height:calc(100dvh - 2rem); padding:1rem;} }
