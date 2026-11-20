@@ -1,0 +1,112 @@
+// Importing a failed wallet bundle never affects flight.
+import {mountHistory} from './personal-history.mjs';
+import {mountPlayfield} from './playfield-modules.mjs';
+export function installInputShield(doc, win, isOpen) {
+  const keydown=event=>{if(isOpen()||doc.querySelector('[data-rk] [role="dialog"]'))event.stopPropagation();};
+  doc.addEventListener('keydown',keydown);
+  return {release:()=>win.dispatchEvent(new win.Event('blur')),dispose:()=>doc.removeEventListener('keydown',keydown)};
+}
+export async function mountAccount({document:doc=globalThis.document,window:win=globalThis.window,importWallet=()=>import('./wallet/index.js'),loadSession=()=>import('./auth-session.mjs')}={}) {
+  const panel=doc.querySelector('.account-controls');if(!panel)return;
+  const urbit=doc.getElementById('urbit-login'),remilia=doc.getElementById('remilianet-login'),wallet=doc.getElementById('wallet-login'),logout=doc.getElementById('account-logout'),inline=doc.getElementById('account-status');
+  const {AuthSession}=await loadSession();
+  const modal=doc.createElement('section');modal.className='hasterrad-auth';modal.hidden=true;modal.dataset.hasterradAuth='';modal.setAttribute('role','dialog');modal.setAttribute('aria-modal','true');modal.setAttribute('aria-labelledby','auth-title');
+  const heading=doc.createElement('h2');heading.id='auth-title';heading.textContent='Ethereum wallet';modal.append(heading);
+  const status=doc.createElement('p');status.setAttribute('role','status');modal.append(status);
+  // RainbowKit renders its chooser into a body-level portal; keep its React
+  // root mounted without showing a separate explanatory dialog first.
+  const island=doc.createElement('div');island.id='hasterrad-wallet';island.hidden=true;doc.body.append(island);
+  const guidance=doc.createElement('p');guidance.textContent='For embedded games, open the standalone game on its own origin to sign in. Cross-origin homepage login is not supported.';modal.append(guidance);
+  const standalone=doc.createElement('a');standalone.href=new URL('/',win.location.origin).href;standalone.target='_blank';standalone.rel='noopener';standalone.textContent='Open standalone game ↗';modal.append(standalone);
+  const close=doc.createElement('button');close.type='button';close.textContent='Return to flight';modal.append(close);doc.body.append(modal);
+  let walletMounted=false,walletLoading=false,walletHandle,lastFocus,channel;
+  let suspended=false;
+  const history=mountHistory(doc,win,()=>refreshHistory());
+  const playfield=mountPlayfield(doc,win);
+  const refreshHistory=()=>{history.clear(!doc.hidden&&!!auth.state.session?.authenticated);return auth.refresh();};
+  const setLabel=(text,error)=>{
+    inline.textContent=text;
+    inline.title=error||`${text} · sign in to save verified scores. Unconfigured providers are disabled.`;
+    status.textContent=error||inline.title;
+  };
+  const auth=new AuthSession({changed:state=>{
+    if(!suspended)playfield.update(state);
+    if(!suspended)void history.show(state.session);
+    const data=state.session||auth.config;
+    const user=state.session?.authenticated?state.session.user:null;
+    const address=user?.provider==='ethereum'&&/^ethereum:1:(0x[0-9a-fA-F]{40})$/.exec(user.id)?.[1];
+    const label=address?`${address.slice(0,6)}…${address.slice(-4)}`:user?.displayName;
+    setLabel(state.revoking?'Signing out…':state.error?'Account unavailable · guest':user?`${user.provider}: ${label}`:'Guest',state.error);
+    if(address&&!state.revoking&&!state.error){
+      // Don't put optional display data on the AuthSession request queue.
+      win.fetch('/api/wallet/display-name',{credentials:'same-origin',cache:'no-store',redirect:'error',signal:AbortSignal.timeout(3500)})
+        .then(response=>response.ok?response.json():null)
+        .then(result=>{
+          if(auth.state===state&&result?.id===user.id&&typeof result.name==='string'&&result.name.length<=64&&/^(?:[a-z0-9-]+\.)+eth$/.test(result.name))setLabel(`ethereum: ${result.name}`);
+        }).catch(()=>{});
+    }
+    for(const [button,name,label] of [[urbit,'urbit','Urbit'],[remilia,'remilianet','RemiliaNET'],[wallet,'wallet','Ethereum wallet']]){
+      button.disabled=!data?.providers[name]||state.revoking||(name==='wallet'&&walletLoading);
+      button.title=!data?.providers[name]?`${label} · unavailable: provider is not configured`:`${label} · optional sign in`;
+    }
+    logout.disabled=state.revoking;logout.hidden=!state.session?.authenticated&&!state.error&&!state.revoking;
+    const logoutLabel=state.error?'Retry sign out':'Sign out';
+    logout.setAttribute('aria-label',logoutLabel);logout.title=logoutLabel;
+  }});
+  const shield=installInputShield(doc,win,()=>!modal.hidden),background=new Map();
+  const show=(opener=doc.activeElement)=>{
+    if(!modal.hidden)return;
+    lastFocus=opener;shield.release();modal.hidden=false;
+    for(const sibling of doc.body.children)if(sibling!==modal){background.set(sibling,sibling.inert);sibling.inert=true;}
+    close.focus();
+  };
+  const hide=()=>{modal.hidden=true;for(const [sibling,inert] of background)sibling.inert=inert;background.clear();(lastFocus||wallet).focus();};
+  const embedded=()=>win.self!==win.top;
+  const act=(button,action)=>button.addEventListener('click',()=>Promise.resolve().then(action).catch(()=>{show(button);status.textContent=auth.state.error||'Account action unavailable or cancelled. Guest flight still works.';}));
+  const provider=async(name,opener)=>{
+    if(!(auth.state.session||auth.config)?.providers[name])return;
+    if(embedded()){heading.textContent='Open standalone to sign in';show(opener);return;}
+    await auth.logout();
+    // Fixed same-origin EAuth/PKCE start; no tokens, popup polling or query identity.
+    win.top.location.href=new URL(`/auth/${name}/start`,win.location.origin).href;
+  };
+  act(urbit,()=>provider('urbit',urbit));act(remilia,()=>provider('remilianet',remilia));
+  act(wallet,async()=>{
+    if(embedded()){heading.textContent='Open standalone to sign in';show(wallet);return;}
+    if(walletLoading)return;
+    if(walletMounted){walletHandle?.open?.();return;}
+    walletLoading=true;wallet.disabled=true;
+    try{
+      const sdk=await importWallet();
+      const css=doc.createElement('link');css.rel='stylesheet';css.href='assets/wallet/index.css';doc.head.append(css);
+      walletHandle=await sdk.mount(island,auth,{openOnMount:true});walletMounted=true;
+    }catch(_){show(wallet);status.textContent='Wallet tools could not load. Retry the Ethereum button, choose another available provider, or continue as guest.';}
+    finally{walletLoading=false;wallet.disabled=!(auth.state.session||auth.config)?.providers.wallet||auth.state.revoking;}
+  });
+  act(logout,async()=>{await auth.logout();await auth.refresh();});
+  urbit.disabled=remilia.disabled=wallet.disabled=true;logout.hidden=true;
+  close.addEventListener('click',hide);
+  doc.addEventListener('keydown',event=>{
+    if(modal.hidden||doc.querySelector('[data-rk] [role="dialog"]'))return;
+    if(event.key==='Escape'){event.preventDefault();hide();}
+    if(event.key==='Tab'){
+      const list=[...modal.querySelectorAll('button:not([hidden]):not(:disabled),a[href],input:not(:disabled),[tabindex="0"]')],first=list[0],last=list.at(-1);
+      if(event.shiftKey&&doc.activeElement===first){event.preventDefault();last?.focus();}
+      else if(!event.shiftKey&&doc.activeElement===last){event.preventDefault();first?.focus();}
+    }
+  });
+  if('BroadcastChannel' in win){
+    channel=new win.BroadcastChannel('hasterrad-auth-invalidation');
+    channel.onmessage=()=>auth.reconcile();auth.invalidated=()=>channel.postMessage('invalidate');
+    auth.signedIn=()=>channel.postMessage('invalidate');
+  }
+  const recheck=()=>{playfield.clear();return refreshHistory();};
+  win.addEventListener('focus',recheck);
+  doc.addEventListener('hasterrad-score-saved',refreshHistory);
+  doc.addEventListener('visibilitychange',()=>{if(doc.hidden){playfield.clear();history.clear();}else if(!suspended)void recheck();});
+  win.addEventListener('pagehide',()=>{suspended=true;playfield.clear();history.clear();});
+  win.addEventListener('pageshow',event=>{suspended=false;if(event.persisted)void recheck();});
+  if((await auth.refresh())?.authenticated)auth.signedIn?.();
+  return {auth,show,hide,modal};
+}
+if(typeof document!=='undefined')mountAccount().catch(()=>{});

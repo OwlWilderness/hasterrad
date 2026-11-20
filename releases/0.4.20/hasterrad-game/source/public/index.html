@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Dodge. Blast. Survive. Climb the leaderboard.">
+  <title>HASTERRAD · Quantumtekh</title>
+  <link rel="stylesheet" href="assets/asteroids.css">
+  <script src="assets/asteroids-embed.js" defer></script>
+  <script src="assets/utc-clock.js" defer></script>
+  <script src="assets/asteroids-core.js" defer></script>
+  <script src="assets/hasterrad-scores.js" defer></script>
+  <script src="assets/asteroids.js" defer></script>
+<link rel="stylesheet" href="assets/account-shell.css">
+<script type="module" src="assets/account-shell.mjs"></script>
+</head>
+<body>
+  <header class="arcade-header">
+    <div class="account-controls" role="group" aria-label="Optional sign in" aria-describedby="account-status">
+      <button id="urbit-login" type="button" aria-label="Sign in with Urbit" title="Urbit sign in · unavailable in guest-only mode" disabled><img src="assets/brands/urbit.svg" width="24" height="24" alt=""></button>
+      <button id="remilianet-login" type="button" aria-label="Sign in with RemiliaNET" title="RemiliaNET sign in · unavailable in guest-only mode" disabled><img src="assets/brands/remilia.png" width="26" height="26" alt=""></button>
+      <button id="wallet-login" type="button" aria-label="Connect Ethereum wallet" title="Ethereum wallet · unavailable in guest-only mode" aria-haspopup="dialog" disabled><img src="assets/brands/ethereum.svg" width="26" height="30" alt=""></button>
+      <button id="account-logout" type="button" aria-label="Sign out" title="Sign out" hidden><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h5M14 8l4 4-4 4M8 12h10"/></svg></button>
+      <span id="account-status" class="account-status" role="status" title="Guest · scores stay on this device. Sign in is unavailable in the guest-only export.">Guest</span>
+    </div>
+    <div id="beetle-status" aria-label="Beetle status" hidden><strong>Beetle</strong> LV <span data-beetle-field="level"></span> · XP <span data-beetle-field="xp"></span><br>Cheese <span data-beetle-field="cheese"></span></div>
+    <button id="pause" type="button" aria-keyshortcuts="P" title="P to pause" disabled>Pause (P)</button>
+  </header>
+  <main id="arcade" aria-label="HASTERRAD vector arcade" data-playfield-slot="backdrop">
+    <div id="remilia-chat" aria-hidden="true" hidden></div>
+    <svg id="eth-chart" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true" focusable="false" hidden="">
+      <line class="eth-rsi-guide" data-rsi-guide="75" x1="0" x2="1000" vector-effect="non-scaling-stroke"/>
+      <line class="eth-rsi-guide" data-rsi-guide="25" x1="0" x2="1000" vector-effect="non-scaling-stroke"/>
+      <svg class="eth-plot" x="4%" width="92%" height="100%" viewBox="0 0 1000 100" preserveAspectRatio="none">
+        <g class="eth-scroll">
+          <path class="eth-grid" vector-effect="non-scaling-stroke" d="M0 18H1100 M0 34H1100 M0 50H1100 M0 66H1100 M0 82H1100 M0 9V91 M100 9V91 M200 9V91 M300 9V91 M400 9V91 M500 9V91 M600 9V91 M700 9V91 M800 9V91 M900 9V91 M1000 9V91 M1100 9V91"/>
+          <path data-trace="rsi" vector-effect="non-scaling-stroke"/><path data-trace="rsiAvg" vector-effect="non-scaling-stroke"/><path data-trace="macd" vector-effect="non-scaling-stroke"/><path data-trace="signal" vector-effect="non-scaling-stroke"/>
+          <path data-trace="rsi-pending" vector-effect="non-scaling-stroke"/><path data-trace="rsiAvg-pending" vector-effect="non-scaling-stroke"/><path data-trace="macd-pending" vector-effect="non-scaling-stroke"/><path data-trace="signal-pending" vector-effect="non-scaling-stroke"/>
+          <path data-trace="price" vector-effect="non-scaling-stroke"/>
+        </g>
+      </svg>
+    </svg>
+    <div class="arena-top" data-playfield-slot="strip">
+      <div class="hud" aria-label="Game statistics">
+        <div><span class="hud-label">Score</span><output id="score">000000</output></div>
+        <div class="best"><span class="hud-label" id="top-score-title">Overall top score <span class="score-mode">Classic</span></span><output id="best" aria-labelledby="top-score-title">—</output></div>
+        <div class="wave"><span class="hud-label">Level</span><output id="wave">01</output></div>
+        <div class="lives"><span class="hud-label">Ships</span><output id="lives">△ △ △</output></div>
+        <div class="weapon"><span id="weapon-status" role="status" aria-live="polite">TAP FIRE · 4 LIVE MAX</span><span id="weapon-unlocks">AUTO @ Level 2: LOCKED · FASTER @ Level 5: LOCKED</span></div>
+      </div>
+      <section id="eth-market-box" class="playfield-copy" aria-label="ETH/USD market" hidden>
+        <div class="eth-quote">
+          <strong>ETH/USD <span data-market-field="price">Unavailable</span></strong>
+          <span data-market-field="day" hidden></span>
+        </div>
+        <p class="eth-context">
+          <span class="sr-only">Coinbase</span><span aria-hidden="true">CB</span>
+          <span class="sr-only">2h window</span><span aria-hidden="true">· 2h</span>
+          <span class="sr-only">1m candles</span><span aria-hidden="true">· <svg aria-hidden="true" viewBox="0 0 16 12" width="16" height="12"><path d="M4 1v2m0 5v3M11 1v4m0 4v2"/><rect x="2.5" y="3" width="3" height="5"/><rect x="9.5" y="5" width="3" height="4"/></svg> 1m</span>
+          <span class="sr-only">1s ticker</span><span aria-hidden="true">· <svg aria-hidden="true" viewBox="0 0 16 12" width="16" height="12"><path d="M1 7h4l2-5 3 8 2-3h3"/></svg> 1s</span>
+          <span class="sr-only">RSI guides 25/75</span><span aria-hidden="true">· RSI 25/75</span>
+        </p>
+        <ul class="eth-legend" aria-label="Chart lines">
+          <li><svg aria-hidden="true" width="24" height="8"><path data-trace="price" d="M1 4h22"/></svg><span aria-hidden="true">$</span><span class="sr-only">Price in US dollars</span></li>
+          <li><svg aria-hidden="true" width="24" height="8"><path data-trace="rsi" d="M1 4h22"/></svg><span aria-hidden="true">RSI 14</span><span class="sr-only">Relative strength index, 14 periods</span></li>
+          <li><svg aria-hidden="true" width="24" height="8"><path data-trace="rsiAvg" d="M1 4h22"/></svg><span aria-hidden="true">SMA 14</span><span class="sr-only">Simple moving average of RSI, 14 periods</span></li>
+          <li><svg aria-hidden="true" width="24" height="8"><path data-trace="macd" d="M1 4h22"/></svg><span aria-hidden="true">MACD 12/26</span><span class="sr-only">Moving average convergence divergence, 12 and 26 periods</span></li>
+          <li><svg aria-hidden="true" width="24" height="8"><path data-trace="signal" d="M1 4h22"/></svg><span aria-hidden="true">Sig 9</span><span class="sr-only">MACD signal, 9 periods</span></li>
+        </ul>
+      </section>
+    </div>
+    <canvas id="space" tabindex="0" aria-label="Game field. WASD controls: A/D or left/right arrows rotate, W or up arrow thrusts, S / H uses hyperspace. Tap Space to fire; hold for automatic fire at Level 2; faster fire at Level 5. Four shots on screen maximum. P pauses. Tab leaves the game.">Your browser needs Canvas support to play.</canvas>
+    <section id="overlay" class="overlay" aria-labelledby="game-title">
+      <p class="eyebrow" id="message">QUANTUMTEKH / DEEP SPACE</p>
+      <h1 id="game-title">HASTERRAD</h1>
+      <p id="subtitle">Nothing out here but you.</p>
+      <button id="start" type="button">Start flight <span aria-hidden="true">↗</span></button>
+      <p class="enter-hint" id="enter-hint">or press Enter</p>
+      <div class="score-panels">
+        <section id="personal-history" class="leaderboard" aria-labelledby="personal-history-title" hidden>
+          <h2 id="personal-history-title">My Scores</h2>
+          <p id="personal-history-status" role="status"></p>
+          <div id="personal-history-list" class="score-scroll" role="region" aria-label="Your latest verified Classic scores" tabindex="0" hidden>
+            <table class="score-table" aria-label="Your latest verified Classic scores">
+              <thead><tr><th scope="col">Date</th><th scope="col">Score</th><th scope="col">Level</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <button id="personal-history-retry" type="button" hidden>Retry score history</button>
+        </section>
+        <section class="leaderboard" aria-labelledby="leaderboard-title">
+          <h2 id="leaderboard-title">TOP 5 / CLASSIC</h2>
+          <p id="leaderboard-status" role="status" tabindex="-1">Loading verified Classic scores…</p>
+          <ol id="leaderboard-list" aria-label="Top five verified-account high scores"></ol>
+          <button id="score-retry" type="button" hidden>Retry saving score</button>
+        </section>
+      </div>
+
+      <div class="instructions">
+        <span><kbd>A</kbd><kbd>D</kbd> / <kbd>←</kbd><kbd>→</kbd> rotate</span><span><kbd>W</kbd> / <kbd>↑</kbd> thrust</span>
+        <span><kbd>Space</kbd> fire</span><span><kbd>S / H</kbd> hyperspace</span>
+      </div>
+      <p class="small-note">3 ships · break rocks · survive the next level<br>Tap Space or Fire for each shot · 4 shots on screen, not limited ammo.<br>Auto fire at Level 2 · faster auto fire at Level 5 · resets each run.<br>Hyperspace recharges in 5 seconds.</p>
+    </section>
+    <p id="announcement" class="sr-only" role="status" aria-live="polite"></p>
+    <div id="touch-controls" class="touch-controls" aria-label="Touch flight controls">
+      <div id="flight-stick" class="flight-stick" role="group" aria-label="Flight joystick: drag toward the desired heading; farther from center increases thrust; drag down to turn around"><span id="stick-knob" class="stick-knob" aria-hidden="true">△</span></div>
+      <div class="touch-group"><button type="button" data-action="hyperspace" class="hyper" aria-label="Hyperspace">H</button><button type="button" data-action="fire" class="fire" aria-label="Fire">Fire</button></div>
+    </div>
+    <noscript><p class="no-script">JavaScript is required to play. <a href="https://quantumtekh.com/">Return home</a>.</p></noscript>
+  </main>
+  <footer class="arcade-footer"><a href="https://quantumtekh.com/" class="home-link">← Quantumtekh</a><span id="flight-status">READY WHEN YOU ARE</span><span class="footer-meta"><time id="utc-clock" hidden></time><span class="build-version" aria-label="Hasterrad version">v0.4.20</span></span></footer>
+</body>
+</html>

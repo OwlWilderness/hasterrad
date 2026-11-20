@@ -1,0 +1,30 @@
+HASTERRAD descriptive sign-in provider artwork
+
+These logos identify optional third-party sign-in providers, not endorsement.
+Marks and any underlying rights remain with their respective holders. No new
+blanket artwork license or upstream copyright notice has been invented.
+
+Urbit: authentic urbit-digi.svg; byte-identical retained original from
+https://raw.githubusercontent.com/urbit/urbit.org/5e282aa7872c28b138585c8544eb40b78ce40938/public/icons/urbit-digi.svg
+Original two paths, white fills and viewBox 0 0 20 20 retained unchanged.
+Retained upstream source notes reported no LICENSE/COPYING at that pin.
+
+Remilia classic smiley: authentic yellow/black Remilia Corporation profile mark,
+not the RemiliaNET blue/white academy crest or an emoji/custom redrawing.
+https://wiki.remilia.org/images/c/c5/RemiliaCorporationTwitterProfile.jpg
+https://wiki.remilia.org/File:RemiliaCorporationTwitterProfile.jpg
+The source was converted losslessly from decoded JPEG pixels to local PNG by
+Apple sips; no geometry, color, crop or facial features were invented.
+Official product description identifies the yellow-enamel classic smiley:
+https://store.remilia.org/products/remilia-pin
+Source describes appropriation from TMN Classix album artwork; this retention
+is provenance, not a representation of exclusive Remilia ownership or a
+redistribution license. Used descriptively at the user's explicit request.
+
+Ethereum: byte-identical official purple diamond SVG, original paths/fills and
+viewBox 0 0 1920 1920 retained unchanged.
+https://ethereum.org/images/assets/svgs/eth-diamond-purple.svg
+https://ethereum.org/en/assets/
+
+Full source and emitted artwork SHA-256 values retained in repository evidence
+and artifact.json. No remote artwork/font requests are made by the game.
